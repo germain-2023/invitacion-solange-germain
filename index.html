@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <title>Invitación de boda · Solange &amp; Germain</title>
+  <meta name="description" content="Solange &amp; Germain · Nos casamos el 20 de febrero de 2027. Abre tu invitación personalizada.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CL">
+  <meta property="og:site_name" content="Invitación de boda">
+  <meta property="og:title" content="💌 Invitación · Solange &amp; Germain">
+  <meta property="og:description" content="Nos casamos · 20 de febrero de 2027. Con mucho cariño te invitamos a celebrar.">
+  <!-- Al publicar en GitHub Pages, reemplazar TU_USUARIO_GITHUB por tu usuario exacto -->
+  <meta property="og:image" content="https://TU_USUARIO_GITHUB.github.io/invitacion-solange-germain/portada.jpg">
+  <meta property="og:image:secure_url" content="https://TU_USUARIO_GITHUB.github.io/invitacion-solange-germain/portada.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1734">
+  <meta property="og:image:height" content="907">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Invitación de boda · Solange &amp; Germain">
+  <meta name="twitter:image" content="https://TU_USUARIO_GITHUB.github.io/invitacion-solange-germain/portada.jpg">
+  <style>
+    :root{color-scheme:light}*{box-sizing:border-box}
+    body{margin:0;background:#f4eee7;color:#5b4233;font-family:Georgia,serif;min-height:100dvh;display:grid;place-items:center;padding:22px}
+    main{width:min(100%,620px);text-align:center;background:#fffaf4;border:1px solid #dfc9ab;border-radius:19px;overflow:hidden;box-shadow:0 14px 45px #6653441a}
+    img{display:block;width:100%;height:auto;object-fit:contain}
+    section{padding:18px 22px 28px}
+    h1{margin:0 0 8px;font-size:clamp(24px,5vw,33px);font-weight:normal}
+    p{margin:0 0 20px;line-height:1.5;font-size:16px;color:#785d49}
+    a.button{display:inline-block;padding:13px 27px;border-radius:28px;background:#b99a70;color:white;text-decoration:none;font-family:Arial,sans-serif;font-size:15px;font-weight:600}
+    a.button:hover{background:#96734f}
+    #error{color:#8a3f30;font-family:Arial,sans-serif;font-size:14px}
+  </style>
+</head>
+<body>
+<main>
+  <img src="portada.jpg" alt="Sobre de boda de Solange y Germain">
+  <section>
+    <h1>Solange &amp; Germain</h1>
+    <p>Nos casamos · 20 de febrero de 2027</p>
+    <a id="abrir" class="button" href="#" hidden>Abriendo invitación…</a>
+    <p id="error" hidden>Este enlace necesita el código de invitación personalizado. Solicita tu enlace a los novios.</p>
+  </section>
+</main>
+<script>
+(()=>{
+  'use strict';
+  const destino = 'https://script.google.com/a/ge2.cl/macros/s/AKfycbzdv1Ltsy32ri4gSYIhPp2yb6mDv8QjLd3TCZT-mIhoKEds4a8kFoA1u-bERp1lXCYQ/exec';
+  const token = new URLSearchParams(window.location.search).get('inv');
+  const boton = document.getElementById('abrir');
+  if(!token || !/^[a-f0-9]{16,100}$/i.test(token)){
+    document.getElementById('error').hidden = false;
+    return;
+  }
+  const url = destino + '?inv=' + encodeURIComponent(token);
+  boton.href = url;
+  boton.hidden = false;
+  // El navegador del invitado sí sigue este enlace; los lectores de
+  // miniaturas (WhatsApp) solo necesitan leer las metaetiquetas del HTML.
+  window.setTimeout(()=>window.location.replace(url), 1000);
+})();
+</script>
+</body>
+</html>
