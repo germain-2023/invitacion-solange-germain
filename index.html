@@ -41,7 +41,7 @@
   <section>
     <h1>Solange &amp; Germain</h1>
     <p>Nos casamos · 20 de febrero de 2027</p>
-    <a id="abrir" class="button" href="#" hidden>Abriendo invitación…</a>
+    <a id="abrir" class="button" href="#" hidden>Abrir invitación</a>
     <p id="error" hidden>Este enlace necesita el código de invitación personalizado. Solicita tu enlace a los novios.</p>
   </section>
 </main>
@@ -60,7 +60,7 @@
   boton.hidden = false;
   // El navegador del invitado sí sigue este enlace; los lectores de
   // miniaturas (WhatsApp) solo necesitan leer las metaetiquetas del HTML.
-  window.setTimeout(()=>window.location.replace(url), 1000);
+  window.location.replace(url);
 })();
 </script>
 </body>
