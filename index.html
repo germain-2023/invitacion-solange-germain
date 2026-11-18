@@ -30,8 +30,11 @@
     section{padding:18px 22px 28px}
     h1{margin:0 0 8px;font-size:clamp(24px,5vw,33px);font-weight:normal}
     p{margin:0 0 20px;line-height:1.5;font-size:16px;color:#785d49}
-    a.button{display:inline-block;padding:13px 27px;border-radius:28px;background:#b99a70;color:white;text-decoration:none;font-family:Arial,sans-serif;font-size:15px;font-weight:600}
-    a.button:hover{background:#96734f}
+    .loading{display:flex;align-items:center;justify-content:center;gap:11px;margin:2px auto 7px;color:#7b6246;font:600 15px Arial,sans-serif}
+    .spinner{width:19px;height:19px;border:2px solid #dfcbb3;border-top-color:#a58357;border-radius:50%;animation:giro .8s linear infinite}
+    @keyframes giro{to{transform:rotate(360deg)}}
+    .hint{font:13px/1.5 Arial,sans-serif;color:#8d7866;margin:0}
+    @media (prefers-reduced-motion:reduce){.spinner{animation:none}}
     #error{color:#8a3f30;font-family:Arial,sans-serif;font-size:14px}
   </style>
 </head>
@@ -41,7 +44,10 @@
   <section>
     <h1>Solange &amp; Germain</h1>
     <p>Nos casamos · 20 de febrero de 2027</p>
-    <a id="abrir" class="button" href="#" hidden>Abrir invitación</a>
+    <div id="cargando" role="status" aria-live="polite" hidden>
+      <div class="loading"><span class="spinner" aria-hidden="true"></span><span>Preparando tu invitación…</span></div>
+      <p class="hint">Serás dirigido automáticamente. No necesitas presionar nada.</p>
+    </div>
     <p id="error" hidden>Este enlace necesita el código de invitación personalizado. Solicita tu enlace a los novios.</p>
   </section>
 </main>
@@ -50,16 +56,15 @@
   'use strict';
   const destino = 'https://script.google.com/a/ge2.cl/macros/s/AKfycbzdv1Ltsy32ri4gSYIhPp2yb6mDv8QjLd3TCZT-mIhoKEds4a8kFoA1u-bERp1lXCYQ/exec';
   const token = new URLSearchParams(window.location.search).get('inv');
-  const boton = document.getElementById('abrir');
+  const cargando = document.getElementById('cargando');
   if(!token || !/^[a-f0-9]{16,100}$/i.test(token)){
     document.getElementById('error').hidden = false;
     return;
   }
   const url = destino + '?inv=' + encodeURIComponent(token);
-  boton.href = url;
-  boton.hidden = false;
-  // El navegador del invitado sí sigue este enlace; los lectores de
-  // miniaturas (WhatsApp) solo necesitan leer las metaetiquetas del HTML.
+  cargando.hidden = false;
+  // Redirección inmediata: sin botón y sin espera programada.
+  // WhatsApp puede leer las etiquetas de miniatura sin ejecutar JavaScript.
   window.location.replace(url);
 })();
 </script>
